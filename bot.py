@@ -25,13 +25,15 @@ def fetch_announcements():
     url = "https://www.northsouth.edu/nsu-announcements/"
     response = requests.get(url)
     if response.status_code != 200:
-        print("Failed to fetch announcements")
+        print(f"Failed to fetch announcements, status code: {response.status_code}")
         return []
     
     soup = BeautifulSoup(response.text, "html.parser")
+    print(soup.prettify())  # Debugging: Check the HTML content
     announcements = []
     
-    for item in soup.select("div.blog-title > a"):  # Adjust selector based on NSU page
+    # Adjust selector based on NSU page
+    for item in soup.select("div.blog-title > a"):  
         title = item.get_text(strip=True)
         link = item["href"]
         announcements.append({"title": title, "link": link})
@@ -51,6 +53,10 @@ async def on_ready():
 async def check_announcements():
     global sent_announcements
     channel = client.get_channel(CHANNEL_ID)
+    if channel is None:
+        print(f"Error: Could not find channel {CHANNEL_ID}")
+        return
+
     announcements = fetch_announcements()
 
     for announcement in announcements:
