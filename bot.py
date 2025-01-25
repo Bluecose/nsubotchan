@@ -6,7 +6,7 @@ import json
 import os
 
 TOKEN = "vP7wIqhbgRjKesSFYEkmabzm-mV1wZ6u"  # Replace with your Discord bot token
-CHANNEL_ID = 123456789012345678  # Replace with your Discord channel ID
+CHANNEL_ID = 911922310196367422  # Replace with your Discord channel ID
 SENT_FILE = "sent_announcements.json"
 
 # Initialize sent announcements file
